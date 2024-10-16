@@ -21,7 +21,7 @@ const scrollToResults = () => {
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
 const resultsContainer = document.getElementById("results");
-const corsProxy = "https://corsproxy.io/?";
+const corsProxy = "https://cors-anywhere.pulkitpareekofficial.workers.dev/?url=";
 
 // functions that manipulates the queries of url to get a low resolution image to increase page speed
 function optimisedImageUrl(url) {
@@ -51,7 +51,7 @@ function fetchAndShow() {
           let imageAndInfo = "";
 
           if (result.qid === "movie" && result.i) {
-            imageAndInfo = `<a onClick="setUrl(this); return setVideo(this);" url="imdb=${result.id}&type=movie&title=${result.l.replace(/ /g, "_")}" isWebSeries="false" title="${result.l}"  class="links" IMDB="${result.id}" href="https://embed.smashystream.com/playere.php?imdb=${result.id}" target="_blank">
+            imageAndInfo = `<a onClick="setUrl(this); return setVideo(this);" url="imdb=${result.id}&type=movie&title=${result.l.replace(/ /g, "_")}" isWebSeries="false" title="${result.l}"  class="links" IMDB="${result.id}" href="https://www.2embed.cc/embed/${result.id}" target="_blank">
                      <img alt="${result.l}" src="${optimisedImageUrl(result.i.imageUrl)}">
                       <div class="info">
                        <h3>${result.l}</h3>
@@ -59,7 +59,7 @@ function fetchAndShow() {
                       </div>
                    </a>`;
           } else if (result.qid === "tvSeries" && result.i) {
-            imageAndInfo = `<a onClick="setUrl(this); return setVideo(this);" url="imdb=${result.id}&season=1&episode=1&title=${result.l.replace(/ /g, "_")}" IMDB="${result.id}" title="${result.l}" isWebSeries="true" class="links" href="https://embed.smashystream.com/playere.php?imdb=${result.id}&season=1&episode=1" target="_blank">
+            imageAndInfo = `<a onClick="setUrl(this); return setVideo(this);" url="imdb=${result.id}&season=1&episode=1&title=${result.l.replace(/ /g, "_")}" IMDB="${result.id}" title="${result.l}" isWebSeries="true" class="links" href="https://www.2embed.cc/embedtv/${result.id}&s=1&e=1" target="_blank">
                       <img alt="${result.l}" src="${optimisedImageUrl(result.i.imageUrl)}">
                         <div class="info">
                           <h3>${result.l}</h3>
@@ -88,7 +88,7 @@ function setAll(imdb, title, season, episode, type) {
     a.setAttribute("title", title);
     a.setAttribute("class", "links");
     a.setAttribute("IMDB", imdb);
-    a.setAttribute("href", " https://embed.smashystream.com/playere.php?imdb=" + imdb);
+    a.setAttribute("href", "https://www.2embed.cc/embed/" + imdb);
     a.setAttribute("target", "_blank");
     a.click();
   } else if (imdb && title && episode && !type) {
@@ -103,7 +103,7 @@ function setAll(imdb, title, season, episode, type) {
     a.setAttribute("IMDB", imdb);
     a.setAttribute(
       "href",
-      `https://embed.smashystream.com/playere.php?imdb=${imdb}&season=${season}&episode=${episode}`
+      `https://www.2embed.cc/embedtv/${imdb}&s=${season}&e=${episode}`
     );
     a.setAttribute("target", "_blank");
     a.click();
@@ -337,7 +337,7 @@ function setVideo(element) {
             minimumIntegerDigits: 2,
             useGrouping: false,
           });
-          episodesData += `<a class="episodes" title="${seasonsDataJSON.name + ": E" + formatedEpisodeNumber + ". " + episode.name}" cssidentification="s${seasonNumber}e${episodeNumber}" url="imdb=${imdbID}&season=${seasonNumber}&episode=${episodeNumber}&title=${seasonsDataJSON.name.replace(/ /g, "_") + "_E" + formatedEpisodeNumber + "_" + episode.name.replace(/ /g, "_")}" onClick="event.preventDefault();setVideo(this);setUrl(this); " href="https://embed.smashystream.com/playere.php?imdb=${imdbID}&season=${seasonNumber}&episode=${episodeNumber}">E${formatedEpisodeNumber}. ${episode.name}</a>`;
+          episodesData += `<a class="episodes" title="${seasonsDataJSON.name + ": E" + formatedEpisodeNumber + ". " + episode.name}" cssidentification="s${seasonNumber}e${episodeNumber}" url="imdb=${imdbID}&season=${seasonNumber}&episode=${episodeNumber}&title=${seasonsDataJSON.name.replace(/ /g, "_") + "_E" + formatedEpisodeNumber + "_" + episode.name.replace(/ /g, "_")}" onClick="event.preventDefault();setVideo(this);setUrl(this); " href="https://www.2embed.cc/embedtv/${imdbID}&s=${seasonNumber}&e=${episodeNumber}">E${formatedEpisodeNumber}. ${episode.name}</a>`;
         }
 
         episodeContainer.innerHTML = episodesData;
